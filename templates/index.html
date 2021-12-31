@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <title>Login and Registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="main">
+            <div class="header">
+                <h1>Login and Registration</h1>
+                {%with messages = get_flashed_messages(with_categories="logout")%}
+                    {%if messages%}
+                        {%for category, message in messages%}
+                            {%if category=="logout"%}
+                                <p class="logout_message" style="color: red;">{{message}}</p>
+                            {%endif%}
+                        {%endfor%}
+                    {%endif%}
+                {%endwith%}
+            </div>
+            <div class="body">
+                <div class="registration">
+                    <h2>Register here!</h2>
+                    <div class="form">
+                        <form action="/register" method="post" id="register_form">
+                            <div class="form-group">
+                                <label for="first_name">First name:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="first_name")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="first_name"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="first_name" name="first_name"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last name:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="last_name")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="last_name"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="last_name" name="last_name"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="email")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="email"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="email" name="email"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="password")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="password"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="password" name="password"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Confirm password:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="confirm_password")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="confirm_password"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="password" name="confirm_password"><br>
+                            </div>
+                            <input type="submit" name="submit" value="Register!">
+                        </form>
+                    </div>
+                </div>
+                <div class="login">
+                    <h2>Login here!</h2>
+                    <div class="form">
+                        <form action="/login" method="post" id="login_form">
+                            <div class="form-group">
+                                <label for="email">Email:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="login_email")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="login_email"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="email" name="email"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label><br>
+                                {%with messages = get_flashed_messages(with_categories="login_password")%}
+                                    {%if messages%}
+                                        {%for category, message in messages%}
+                                            {%if category=="login_password"%}
+                                                <p class="error_message">{{message}}</p>
+                                            {%endif%}
+                                        {%endfor%}
+                                    {%endif%}
+                                {%endwith%}
+                                <input type="password" name="password"><br>
+                            </div>
+                            <input type="submit" name="submit" value="Login!">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

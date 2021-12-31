@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Simplified Wall</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="main_content">
+            <div class="success_header">
+                <div class="title">
+                    <h2 id="title">CodingDojo Wall (Simplified)</h2>
+                </div>
+                <div class="welcome">
+                    <h6 id="welcome">Welcome {{session['first_name']}}!</h6>
+                    <a href="/" id="logoff">log off</a>
+                </div>
+            </div>
+            <div class="success_body">
+                <div class="your_messages">
+                    <h6><u>{{messages_number}} Message(s) for you ({{session['first_name']}})</u></h6>
+                    {%if messages_for%}
+                        {%for message in messages_for%}
+                            <div class="form">
+                                <form action="/delete/{{message[0]}}" method="post" id="delete_form{{message[0]}}">
+                                <div class="form-group">
+                                    <input type="hidden" name="message_id" value="message[0]">
+                                    <div class="the_message">
+                                        {%if other_users%}
+                                            {%for user in other_users%}
+                                                {%if user[0] == message[2]%}
+                                                    <p class="sent_from">{{user[1]}} said ({{message[4]}} ago):</p>
+                                                {%endif%}
+                                            {%endfor%}
+                                        {%endif%}
+                                        <p class="message_received">"{{message[1]}}"</p>
+                                    </div>
+                                    <div class="delete_image">
+                                        <input type="image" name="delete_image" id="delete_image{{message[0]}}" src="{{url_for('static', filename='images/bin.png')}}">
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        {%endfor%}
+                    {%endif%}
+                </div>
+                <div class="send_message">
+                    <h6><u>Send a message.</u></h6>
+                    <p>You have sent a total of {{total_messages_sent}} message(s) so far.</p>
+                    {%if other_users%}
+                        {%for user in other_users%}
+                            <div class="form">
+                                <form action="/send_message/{{user[0]}}" method="post" id="send_message_form{{user[0]}}">
+                                    <div class="form-group">
+                                        <input type="hidden" name="receipient_id" value="{{user[0]}}">
+                                        <div class="other_user_name"><p>{{user[1]}}</p></div>
+                                        <div class="textarea">
+                                            <textarea name="message_textarea" id="message_textarea" cols="65" rows="3" form="send_message_form{{user[0]}}"></textarea>
+                                        </div>
+                                        <div class="send_button">
+                                            <input type="submit" name="send" value="Send">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        {%endfor%}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
